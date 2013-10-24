@@ -19,23 +19,25 @@ SASS_BIN = '/usr/bin/sass' # location of the sass binary
 As well, you will need a dictionary to define the sass input and output files.
 
 SASS = (
-    { 
-        'name' : 'test', 
-        'details' : { 
-            'input' : 'sass/test.sass', 
-            'output' : 'css/test.css',
+    {
+        'name' : 'test',
+        'details' : {
+            'input' : ROOT_DIR + '/app/static/app/sass/test.sass',
+            'output' : ROOT_DIR + '/app/static/app/css/test.css',
         }
     },
-    { 
-        'name' : 'test2', 
-        'details' : { 
-            'input' : 'sass/test2.sass', 
-            'output' : 'css/test2.css', 
+    {
+        'name' : 'test2',
+        'details' : {
+            'input' : ROOT_DIR + '/app2/static/app2/sass/test2.sass',
+            'output' : ROOT_DIR + '/app2/static/app2/css/test2.css',
         }
     },
 )
 
-Once all of your Sass files have been defined in your settings.py file, you can now reference 
+where ROOT_DIR - is a full path to project like /var/www/django
+
+Once all of your Sass files have been defined in your settings.py file, you can now reference
 them in your templates.
 
 {% load sass_tag %}
@@ -52,7 +54,7 @@ the sass file, generating your css.
 
 Management Command
 -------------------------------
-The 'sassify' command is used to generate the css manually. The css will only be generated if 
+The 'sassify' command is used to generate the css manually. The css will only be generated if
 there are changes made to the sass files.
 
 python manage.py sassify [OPTIONS]
@@ -66,13 +68,13 @@ Options:
 
 '--list'
     - List the status of your named sass entries.
-    
+
 '--clean'
     - Remove all generated files.
-    
-    
-    
+
+
+
 Compatability
 -------------------------------
-This library is only compatible with Linux/BSD based distros. I don't use Windows, so if you want 
+This library is only compatible with Linux/BSD based distros. I don't use Windows, so if you want
 Windows support, feel free to submit a patch.

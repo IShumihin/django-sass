@@ -1,9 +1,12 @@
 from django.db import models
 from django.conf import settings
 from django.utils.http import urlquote
+from django.templatetags.static import static
 
-SASS_ROOT = getattr(settings, 'SASS_ROOT', settings.MEDIA_ROOT)
-SASS_URL = getattr(settings, 'SASS_URL', settings.MEDIA_URL)
+
+# ROOT_DIR - is a full path to project like /var/www/django
+SASS_ROOT = getattr(settings, 'SASS_ROOT', settings.ROOT_DIR)
+SASS_URL = getattr(settings, 'SASS_URL', settings.STATIC_URL)
 
 
 class SassModel(models.Model):
@@ -21,7 +24,7 @@ class SassModel(models.Model):
         return self.css_path.split(SASS_ROOT)[1].lstrip('/')
 
     def css_media_path(self):
-        return SASS_URL + urlquote(self.relative_css_path())
+        return static(self.relative_css_path().split('static/')[-1])
 
 
 from sass import listeners
